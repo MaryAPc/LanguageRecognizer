@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+	
+	<item
+		android:icon="@drawable/ic_add_black_36dp"
+		android:title="@string/menu_title_new_text" />
+	
+	<item
+		android:icon="@drawable/ic_restore_black_36dp"
+		android:title="@string/menu_title_history" />
 
 </menu>

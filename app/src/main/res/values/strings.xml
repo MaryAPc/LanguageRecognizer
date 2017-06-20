@@ -5,4 +5,7 @@
 	<string name="navigation_drawer_close">Close navigation drawer</string>
 	
 	<string name="action_settings">Settings</string>
+	<string name="menu_title_new_text">Новый текст</string>
+	<string name="menu_title_history">История</string>
+	<string name="hint_text_for_recognize">Текст для распознавания</string>
 </resources>

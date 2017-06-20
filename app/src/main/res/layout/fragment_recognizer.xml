@@ -5,6 +5,13 @@
 	android:gravity="center"
 	android:orientation="vertical">
 	
+	<ProgressBar
+		android:id="@+id/fragment_recognizer_progress_bar"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="@dimen/fab_margin"
+		android:visibility="invisible"/>
+	
 	<EditText
 		android:id="@+id/fragment_recognizer_edit_text_input_text"
 		android:layout_width="@dimen/edit_text_width"
@@ -14,6 +21,7 @@
 		android:background="@drawable/edit_text_background"
 		android:gravity="top"
 		android:hint="@string/hint_text_for_recognize"
+		android:paddingBottom="@dimen/edit_text_padding"
 		android:paddingLeft="@dimen/edit_text_padding"
 		android:paddingRight="@dimen/edit_text_padding"
 		android:paddingTop="@dimen/edit_text_padding" />

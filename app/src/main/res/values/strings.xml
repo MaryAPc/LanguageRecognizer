@@ -8,4 +8,15 @@
 	<string name="menu_title_new_text">Новый текст</string>
 	<string name="menu_title_history">История</string>
 	<string name="hint_text_for_recognize">Текст для распознавания</string>
+	<string name="api_key">4978e60252ae102dfe1341146bb8cc3ec4bbbd78</string>
+	<string name="mode_json">json</string>
+	<string name="dialog_network_error_title">Ошибка сети!</string>
+	<string name="dialog_network_error_message">Повторите попытку позже</string>
+	<string name="ok_response_title">Распознанный язык:</string>
+	<string name="error_response_title">Не удалось распознать язык</string>
+	<string name="error_response_message">Введите больше символов</string>
+	<string name="error_title">Ошибка!</string>
+	<string name="error_message_empty_text">Введите текст</string>
+	<string name="error_title_unknown_lang">Ошибка</string>
+	<string name="error_message_unknown_lang">Язык нераспознан</string>
 </resources>

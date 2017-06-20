@@ -13,4 +13,5 @@
 	<dimen name="edit_text_marginBottom">16dp</dimen>
 	<dimen name="edit_text_padding">8dp</dimen>
 	<dimen name="edit_text_paddingRight">8dp</dimen>
+	<dimen name="edit_text_height_land">130dp</dimen>
 </resources>

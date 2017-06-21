@@ -13,10 +13,14 @@ import com.softomate.test.languagerecognizer.view.MainView;
 public class MainPresenter extends MvpPresenter<MainView> {
 
 	public void addFragment(Fragment fragment, FragmentManager fragmentManager) {
-
 			FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 			fragmentTransaction.add(R.id.activity_main_frame_layout_container, fragment);
 			fragmentTransaction.commit();
 		}
 
+	public void replaceFragment(Fragment fragment, FragmentManager fragmentManager) {
+		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+		fragmentTransaction.replace(R.id.activity_main_frame_layout_container, fragment);
+		fragmentTransaction.commit();
+	}
 }

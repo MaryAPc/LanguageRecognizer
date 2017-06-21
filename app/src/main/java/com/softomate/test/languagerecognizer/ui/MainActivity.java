@@ -71,6 +71,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView, Navi
 			case R.id.menu_drawer_new_text:
 				break;
 			case R.id.menu_drawer_history:
+				mPresenter.replaceFragment(new HistoryFragment(), mFragmentManager);
 				break;
 		}
 		mDrawerLayout.closeDrawer(GravityCompat.START);

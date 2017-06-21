@@ -19,4 +19,5 @@
 	<string name="error_message_empty_text">Введите текст</string>
 	<string name="error_title_unknown_lang">Ошибка</string>
 	<string name="error_message_unknown_lang">Язык нераспознан</string>
+	<string name="history_is_empty">Истории нет</string>
 </resources>

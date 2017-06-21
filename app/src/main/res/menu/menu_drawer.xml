@@ -4,11 +4,11 @@
 	<item
 		android:id="@+id/menu_drawer_new_text"
 		android:icon="@drawable/ic_add_black_36dp"
-		android:title="@string/menu_title_new_text" />
+		android:title="@string/title_new_text" />
 	
 	<item
 		android:id="@+id/menu_drawer_history"
 		android:icon="@drawable/ic_restore_black_36dp"
-		android:title="@string/menu_title_history" />
+		android:title="@string/title_history" />
 
 </menu>

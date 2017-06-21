@@ -6,12 +6,15 @@ import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.softomate.test.languagerecognizer.MyApplication;
 import com.softomate.test.languagerecognizer.R;
+import com.softomate.test.languagerecognizer.database.HistoryDb;
 import com.softomate.test.languagerecognizer.model.DetectResponse;
+import com.softomate.test.languagerecognizer.model.HistoryItem;
 import com.softomate.test.languagerecognizer.network.RetrofitService;
 import com.softomate.test.languagerecognizer.view.RecognizerView;
 
 import rx.Observable;
 import rx.Subscriber;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -19,13 +22,15 @@ import rx.schedulers.Schedulers;
 public class RecognizerPresenter extends MvpPresenter<RecognizerView> {
 
 	private Context mContext = MyApplication.getInstance();
+	private HistoryDb mDatabase = new HistoryDb(mContext);
+	private Subscription mSubscription;
 
 	public void detect(String text) {
 		if (text.length() == 0) {
 			getViewState().showDialog(getStringRes(R.string.error_title), getStringRes(R.string.error_message_empty_text));
 		} else {
 			getViewState().showProgress();
-			requestDetectLanguage(text)
+			mSubscription = requestDetectLanguage(text)
 					.subscribeOn(Schedulers.io())
 					.observeOn(AndroidSchedulers.mainThread())
 					.subscribe(new Subscriber<DetectResponse>() {
@@ -46,6 +51,7 @@ public class RecognizerPresenter extends MvpPresenter<RecognizerView> {
 								if (detectResponse.getLanguage().equals("unknown")) {
 									getViewState().showDialog(getStringRes(R.string.error_title_unknown_lang), getStringRes(R.string.error_message_unknown_lang));
 								} else {
+									saveInHistory(text, detectResponse.getLanguage());
 									getViewState().showDialog(getStringRes(R.string.ok_response_title), detectResponse.getLanguage());
 								}
 							} else if (detectResponse.getStatus().equals(DetectStatus.ERROR.name())) {
@@ -54,6 +60,19 @@ public class RecognizerPresenter extends MvpPresenter<RecognizerView> {
 						}
 					});
 		}
+	}
+
+	public void unsubscribe() {
+		if (mSubscription != null) {
+			mSubscription.unsubscribe();
+		}
+	}
+
+	private void saveInHistory(String text, String language) {
+		HistoryItem item = new HistoryItem();
+		item.setText(text);
+		item.setLanguage(language);
+		mDatabase.addHistory(item);
 	}
 
 	private Observable<DetectResponse> requestDetectLanguage(String text) {

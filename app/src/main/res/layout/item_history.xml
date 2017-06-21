@@ -2,8 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:layout_margin="@dimen/item_margin"
+	android:layout_height="wrap_content"
+	android:layout_marginBottom="@dimen/item_margin_bottom"
+	android:layout_marginLeft="@dimen/item_margin"
+	android:layout_marginRight="@dimen/item_margin"
+	android:layout_marginTop="@dimen/item_margin"
 	android:orientation="vertical">
 	
 	<TextView

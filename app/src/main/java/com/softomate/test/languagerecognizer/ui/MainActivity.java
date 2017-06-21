@@ -4,27 +4,21 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import com.arellomobile.mvp.MvpAppCompatActivity;
-import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.softomate.test.languagerecognizer.R;
-import com.softomate.test.languagerecognizer.presenter.MainPresenter;
-import com.softomate.test.languagerecognizer.view.MainView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends MvpAppCompatActivity implements MainView, NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-	@InjectPresenter
-	MainPresenter mPresenter;
 
 	@BindView(R.id.activity_main_drawer_layout)
 	DrawerLayout mDrawerLayout;
@@ -34,8 +28,6 @@ public class MainActivity extends MvpAppCompatActivity implements MainView, Navi
 
 	@BindView(R.id.activity_main_nav_view)
 	NavigationView mNavigationView;
-
-	private FragmentManager mFragmentManager;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +40,10 @@ public class MainActivity extends MvpAppCompatActivity implements MainView, Navi
 		toggle.syncState();
 
 		mNavigationView.setNavigationItemSelectedListener(this);
-		mFragmentManager = getSupportFragmentManager();
-		if (savedInstanceState != null) {
-			Fragment fragment = mFragmentManager.findFragmentById(R.id.activity_main_frame_layout_container);
-		} else {
-			mPresenter.addFragment(new RecognizerFragment(), mFragmentManager);
+		if (savedInstanceState == null) {
+			FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+			fragmentTransaction.add(R.id.activity_main_frame_layout_container, new RecognizerFragment());
+			fragmentTransaction.commit();
 		}
 	}
 
@@ -67,21 +58,20 @@ public class MainActivity extends MvpAppCompatActivity implements MainView, Navi
 
 	@Override
 	public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+		Fragment fragment = null;
 		switch (item.getItemId()) {
 			case R.id.menu_drawer_new_text:
+				fragment = new RecognizerFragment();
+
 				break;
 			case R.id.menu_drawer_history:
-				mPresenter.replaceFragment(new HistoryFragment(), mFragmentManager);
+				fragment = new HistoryFragment();
 				break;
 		}
+		FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+		fragmentTransaction.replace(R.id.activity_main_frame_layout_container, fragment);
+		fragmentTransaction.commitNow();
 		mDrawerLayout.closeDrawer(GravityCompat.START);
 		return true;
-	}
-
-	@Override
-	public void showFragment(Fragment fragment) {
-		FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-		fragmentTransaction.show(fragment);
-		fragmentTransaction.commit();
 	}
 }

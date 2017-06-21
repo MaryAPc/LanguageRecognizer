@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,12 +36,11 @@ public class HistoryFragment extends MvpAppCompatFragment implements HistoryView
 	TextView mEmptyHistoryTextView;
 
 	private HistoryRecyclerAdapter mAdapter;
-	private List<HistoryItem> mHistoryList = new ArrayList<>();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		mAdapter = new HistoryRecyclerAdapter(mHistoryList);
+		mAdapter = new HistoryRecyclerAdapter(new ArrayList<>());
 	}
 
 	@Nullable
@@ -56,6 +56,8 @@ public class HistoryFragment extends MvpAppCompatFragment implements HistoryView
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+		Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.app_bar_main_toolbar);
+		toolbar.setTitle(R.string.title_history);
 		mPresenter.requestDatabase();
 	}
 

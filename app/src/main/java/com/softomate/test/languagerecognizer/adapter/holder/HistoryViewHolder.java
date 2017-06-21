@@ -8,6 +8,7 @@ import com.softomate.test.languagerecognizer.R;
 import com.softomate.test.languagerecognizer.model.HistoryItem;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class HistoryViewHolder extends RecyclerView.ViewHolder {
 
@@ -19,10 +20,11 @@ public class HistoryViewHolder extends RecyclerView.ViewHolder {
 
 	public HistoryViewHolder(View itemView) {
 		super(itemView);
+		ButterKnife.bind(this, itemView);
 	}
 
 	public void bind(HistoryItem model) {
 		mInputTextView.setText(model.getText());
-		mLanguageTextView.setText(model.getText());
+		mLanguageTextView.setText(model.getLanguage());
 	}
 }

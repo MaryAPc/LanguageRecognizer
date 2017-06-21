@@ -27,18 +27,6 @@ public class HistoryDb {
 		mDatabase.insert(HistoryDbSchema.HistoryTable.NAME, null, values);
 	}
 
-	private static ContentValues getContentValues(HistoryItem request) {
-		ContentValues values = new ContentValues();
-		values.put(HistoryDbSchema.HistoryTable.Cols.TEXT, request.getText());
-		values.put(HistoryDbSchema.HistoryTable.Cols.LANGUAGE, request.getLanguage());
-		return values;
-	}
-
-	private HistoryCursorWrapper queryHistory(String whereClause, String[] whereArgs) {
-		Cursor cursor = mDatabase.query(HistoryDbSchema.HistoryTable.NAME, null, whereClause, whereArgs, null, null, null);
-		return new HistoryCursorWrapper(cursor);
-	}
-
 	public Observable<List<HistoryItem>> getHistory() {
 		List<HistoryItem> history = new ArrayList<>();
 		HistoryCursorWrapper cursor = queryHistory(null, null);
@@ -52,5 +40,17 @@ public class HistoryDb {
 			cursor.close();
 		}
 		return Observable.just(history);
+	}
+
+	private static ContentValues getContentValues(HistoryItem request) {
+		ContentValues values = new ContentValues();
+		values.put(HistoryDbSchema.HistoryTable.Cols.TEXT, request.getText());
+		values.put(HistoryDbSchema.HistoryTable.Cols.LANGUAGE, request.getLanguage());
+		return values;
+	}
+
+	private HistoryCursorWrapper queryHistory(String whereClause, String[] whereArgs) {
+		Cursor cursor = mDatabase.query(HistoryDbSchema.HistoryTable.NAME, null, whereClause, whereArgs, null, null, null);
+		return new HistoryCursorWrapper(cursor);
 	}
 }

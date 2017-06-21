@@ -16,6 +16,7 @@ import com.softomate.test.languagerecognizer.model.HistoryItem;
 
 public class HistoryRecyclerAdapter extends RecyclerView.Adapter<HistoryViewHolder> {
 
+	private HistoryViewHolder mViewHolder;
 	private List<HistoryItem> mHistoryList = new ArrayList<>();
 
 	public HistoryRecyclerAdapter(List<HistoryItem> historyItems) {
@@ -25,7 +26,8 @@ public class HistoryRecyclerAdapter extends RecyclerView.Adapter<HistoryViewHold
 	@Override
 	public HistoryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_history, parent, false);
-		return new HistoryViewHolder(view);
+		mViewHolder = new HistoryViewHolder(view);
+		return mViewHolder;
 	}
 
 	@Override

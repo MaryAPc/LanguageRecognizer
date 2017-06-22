@@ -66,10 +66,6 @@ public class RecognizerFragment extends MvpAppCompatFragment implements Recogniz
 		if (mLastText != null) {
 			mEditText.setText(mLastText);
 		}
-		//Save showing dialog after rotate
-		if (mAlertDialog != null && mShowingDialog) {
-			mAlertDialog.show();
-		}
 	}
 
 	@Override
@@ -104,10 +100,19 @@ public class RecognizerFragment extends MvpAppCompatFragment implements Recogniz
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
 				.setTitle(title)
 				.setMessage(message)
-				.setPositiveButton(android.R.string.ok, (dialogInterface, i) -> mShowingDialog = false);
-		if (mShowingDialog) {
-			mAlertDialog = builder.create();
+				.setCancelable(false)
+				.setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {
+					mShowingDialog = false;
+					mAlertDialog = null;
+				});
+		//Save showing dialog after rotate
+		if (mAlertDialog != null && mShowingDialog) {
 			mAlertDialog.show();
+		} else {
+			mAlertDialog = builder.create();
+			if (mShowingDialog) {
+				mAlertDialog.show();
+			}
 		}
 	}
 

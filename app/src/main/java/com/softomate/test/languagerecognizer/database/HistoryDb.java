@@ -22,12 +22,12 @@ public class HistoryDb {
 		}
 	}
 
-	public void addHistory(HistoryItem request) {
+	public synchronized void addHistory(HistoryItem request) {
 		ContentValues values = getContentValues(request);
 		mDatabase.insert(HistoryDbSchema.HistoryTable.NAME, null, values);
 	}
 
-	public Observable<List<HistoryItem>> getHistory() {
+	public synchronized Observable<List<HistoryItem>> getHistory() {
 		List<HistoryItem> history = new ArrayList<>();
 		HistoryCursorWrapper cursor = queryHistory(null, null);
 		try {

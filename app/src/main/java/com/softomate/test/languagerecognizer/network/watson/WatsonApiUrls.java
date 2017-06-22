@@ -1,4 +1,4 @@
-package com.softomate.test.languagerecognizer.network;
+package com.softomate.test.languagerecognizer.network.watson;
 
 public class WatsonApiUrls {
 

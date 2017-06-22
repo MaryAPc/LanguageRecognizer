@@ -12,7 +12,6 @@ import com.softomate.test.languagerecognizer.model.HistoryItem;
 import com.softomate.test.languagerecognizer.view.HistoryView;
 
 import rx.Observable;
-import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -26,22 +25,7 @@ public class HistoryPresenter extends MvpPresenter<HistoryView> {
 		requestHistory()
 				.subscribeOn(Schedulers.io())
 				.observeOn(AndroidSchedulers.mainThread())
-				.subscribe(new Subscriber<List<HistoryItem>>() {
-					@Override
-					public void onCompleted() {
-
-					}
-
-					@Override
-					public void onError(Throwable e) {
-						e.printStackTrace();
-					}
-
-					@Override
-					public void onNext(List<HistoryItem> history) {
-						getViewState().setList(history);
-					}
-				});
+				.subscribe(historyItems -> getViewState().setList(historyItems));
 	}
 
 	private Observable<List<HistoryItem>> requestHistory() {

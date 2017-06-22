@@ -6,7 +6,8 @@
 	
 	<string name="action_settings">Settings</string>
 	<string name="hint_text_for_recognize">Текст для распознавания</string>
-	<string name="api_key">4978e60252ae102dfe1341146bb8cc3ec4bbbd78</string>
+	<string name="watson_api_key">4978e60252ae102dfe1341146bb8cc3ec4bbbd78</string>
+	<string name="yandex_api_key">trnsl.1.1.20170622T073702Z.6134db4630598a71.81d54eb5036a0d30e72b194e472b5ee5581684d4</string>
 	<string name="mode_json">json</string>
 	<string name="dialog_network_error_title">Ошибка сети!</string>
 	<string name="dialog_network_error_message">Повторите попытку позже</string>
@@ -20,4 +21,5 @@
 	<string name="history_is_empty">Истории нет</string>
 	<string name="title_history">История</string>
 	<string name="title_new_text">Новый текст</string>
+	<string name="translate_language">en-ru</string>
 </resources>
